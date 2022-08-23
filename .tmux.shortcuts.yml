@@ -1,0 +1,5 @@
+- name: pwds
+  prefix: f3
+  shortcuts:
+    prod: secret
+    test: 'less-secret'
