@@ -1,0 +1,2 @@
+#!/bin/bash
+git diff --diff-filter=d --name-only $@
