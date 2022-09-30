@@ -1,6 +1,6 @@
 - name: pwds
   prefix: f3
   shortcuts:
-    any: display-message "no such shortcut"
+    any: 'send-keys c-g'
     prod: secret
     test: 'less-secret'

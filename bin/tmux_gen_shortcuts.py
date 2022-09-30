@@ -55,10 +55,10 @@ for entry in db:
 for i in out:
     if i[0] == "tbl":
         frmtbl, totbl, key = i[1:]
-        print("tmux bind-key -T %(frmtbl)s %(key)s switch-client -T%(totbl)s" % vars())
+        print("bind-key -T %(frmtbl)s %(key)s switch-client -T%(totbl)s" % vars())
     elif i[0] == "anykey":
         frmtbl, key, val = i[1:]
-        print("tmux bind-key -T%(frmtbl)s %(key)s %(val)s" % vars())
+        print("bind-key -T%(frmtbl)s %(key)s %(val)s" % vars())
     else:
         frmtbl, key, val = i[1:]
-        print("tmux bind-key -T%(frmtbl)s %(key)s send-keys \"%(val)s\"" % vars())
+        print("bind-key -T%(frmtbl)s %(key)s send-keys \"%(val)s\"" % vars())
