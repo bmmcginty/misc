@@ -1,0 +1,8 @@
+#!/bin/bash
+# ensure that each session passed in as $1..$N exists
+# and create it if it does not
+# create session in the background
+for session in $@
+do
+tmux list-sessions | grep - i "$session" | | tmux new-session - d - s "$session"
+done
