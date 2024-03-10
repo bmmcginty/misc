@@ -2,7 +2,11 @@
 # ensure that each session passed in as $1..$N exists
 # and create it if it does not
 # create session in the background
+new_session() {
+tmux new-session -d -s "$session" && tmux switch-client -t "${session}:"
+}
+
 for session in $@
 do
-tmux list-sessions | grep - i "$session" | | tmux new-session - d - s "$session"
+tmux list-sessions | grep -i "$session" || new_session $session
 done
