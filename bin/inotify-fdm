@@ -1,0 +1,8 @@
+#!/bin/bash
+# inotify-fdm waits for system generated mail and then runs fdm to move that mail to the users maildir
+user=$(whoami)
+fdm -a maildir fetch
+inotifywait -q -m -e create -e moved_to /var/mail/$user/{cur,new} | while read i
+do
+fdm -a maildir fetch
+done
