@@ -12,6 +12,11 @@ bool no_kill;
 struct Windows *next;
 } Windows;
 
+void add_window(Windows *ptr, HWND hwnd);
+void win_free(PVOID *ptr);
+PVOID win_malloc(int length);
+WINBOOL enum_windows_callback(HWND hwnd, LPARAM ptr);
+
 void win_free(PVOID *ptr) {
 VirtualFree(ptr, 0, MEM_RELEASE);
 }
@@ -86,7 +91,11 @@ length=SendMessage(te, WM_GETTEXTLENGTH, NULL, NULL);
 printf("pid=%d, %Ld\n", ptr_tmp->pid, length);
 body=win_malloc(length+1);
 SendMessage(te, WM_GETTEXT, length+1, body);
-fprintf(fh, "%s\n-----\n", body);
+int written=fprintf(fh, "%s\n-----\n", body);
+fflush(fh);
+if (written-7 != length ) {
+printf("written %d body %d\n",written,length);
+}
 if(!ptr_tmp->proc) {
 ptr_tmp->no_kill=true;
 no_kill=true;
@@ -97,7 +106,7 @@ if(no_kill) {
 printf("failed to open at least one notepad handle for termination so not terminating any windows\n");
 }
 ptr_tmp=ptr;
-while(1) {
+while(ptr_tmp) {
 if(ptr_tmp->pid!=0) {
 //last window entry is an empty entry due to add_window call, so it's pid is set to 0
 if(no_kill==false) {
@@ -114,6 +123,7 @@ win_free(ptr_tmp);
 ptr_tmp=tmp;
 }
 fclose(fh);
+printf("done\n");
 return 0;
 }
 
