@@ -63,9 +63,16 @@ struct tm * timeinfo;
 char fn[255];
 time (&rawtime);
 timeinfo = localtime(&rawtime);
-  strftime(fn,sizeof(fn),"c:\\users\\bmmcginty\\documents\\save-%Y-%m-%d_%H-%M-%S.txt",timeinfo);
+  strftime(fn,sizeof(fn),
+//"c:\\users\\bmmcginty\\documents\\save-%Y-%m-%d_%H-%M-%S.txt",
+"s:\\life\\notes\\save-%Y-%m-%d_%H-%M-%S.txt",
+timeinfo);
 FILE *fh;
 fh=fopen(fn,"wb");
+if(!fh) {
+printf("error: can not open save file\n");
+return 1;
+}
 Windows *ptr;
 HWND w, te;
 PSTR body;
