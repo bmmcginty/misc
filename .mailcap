@@ -1,0 +1,1 @@
+text/html; ~/git/misc/links-to-db %s elinks -dump %s | ~/git/misc/strip-whitespace; copiousoutput
