@@ -11,6 +11,6 @@ mv data/db/${db}.schema.new data/db/${db}.schema
 echo "\t
 \a
 SELECT row_to_json(r) FROM ${db} AS r;
-" | psql -q | gzip -c > data/db/${db}.json.gz.new
-mv data/db/${db}.json.gz.new data/db/${db}.json.gz
+" | psql -q > data/db/${db}.json.new
+mv data/db/${db}.json.new data/db/${db}.json
 done
